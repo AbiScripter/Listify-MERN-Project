@@ -26,3 +26,4 @@ export const updateTodo = (id, updatedTodo) =>
 // Auth APIs
 export const registerUser = (userData) => API.post("/register", userData);
 export const loginUser = (loginData) => API.post("/login", loginData);
+export const getUserData = () => API.get("/user-data");

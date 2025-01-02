@@ -128,4 +128,23 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, login };
+const getUserData = async (req, res) => {
+  try {
+    const userId = req.user.userId; // Get the user ID from the decoded token
+    const userData = await User.findOne({ _id: userId });
+
+    if (!userData) {
+      return res.status(404).json({ msg: "User Not Found" });
+    }
+
+    console.log(userData);
+
+    res
+      .status(200)
+      .json({ msg: "User data fetched Successfully", user_data: userData });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+
+module.exports = { registerUser, login, getUserData };

@@ -67,11 +67,11 @@ const EditModal = ({
             type="text"
             placeholder="Description"
             onChange={(e) => setDescription(e.target.value)}
-            className="border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+            className="border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
             value={description}
           />
           <select
-            className="border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+            className="border border-gray-300 p-3 rounded-lg outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500"
             defaultValue={isCompleted}
             onChange={(e) => setIsCompleted(e.target.value)}
           >
@@ -79,7 +79,7 @@ const EditModal = ({
             <option value={true}>Complete</option>
           </select>
           <button
-            className="px-4 py-2 bg-teal-500 text-white font-semibold rounded-lg shadow-md hover:bg-teal-600 transition-colors"
+            className="px-4 py-2 bg-gray-600 text-white font-semibold rounded-lg shadow-md hover:bg-gray-700 transition-colors"
             onClick={handleUpdateTodo}
           >
             Update

@@ -13,10 +13,10 @@ const AccordianTodo = ({ todos, onEdit, onDelete }) => {
 
   return (
     <div className="w-[50%] rounded-lg">
-      <h1 className="text-2xl text-center mb-6">Todos</h1>
+      <h1 className="text-2xl text-center mb-6">Tasks</h1>
 
       {/* High Priority Accordion */}
-      <div className="border-b">
+      <div className="">
         <h2
           onClick={() => setShowHighPriority(!showHighPriority)}
           className="text-lg font-bold cursor-pointer p-4 bg-gray-200 flex justify-between items-center hover:bg-gray-300 transition-colors duration-200"
@@ -39,22 +39,28 @@ const AccordianTodo = ({ todos, onEdit, onDelete }) => {
           }`}
         >
           <div className="overflow-hidden">
-            <div className="flex flex-col gap-4 justify-center p-4 bg-gray-50 transform origin-top transition-transform duration-300 ease-out">
-              {highPriorityTodos.map((todo) => (
-                <Todo
-                  key={todo._id}
-                  todo={todo}
-                  onEdit={onEdit}
-                  onDelete={onDelete}
-                />
-              ))}
-            </div>
+            {highPriorityTodos.length === 0 ? (
+              <p className="text-center p-4 bg-gray-700 text-white transform origin-top transition-transform duration-300 ease-out">
+                No Tasks
+              </p>
+            ) : (
+              <div className="flex flex-col gap-4 justify-center p-4 bg-gray-50 transform origin-top transition-transform duration-300 ease-out">
+                {highPriorityTodos.map((todo) => (
+                  <Todo
+                    key={todo._id}
+                    todo={todo}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
 
       {/* Medium Priority Accordion */}
-      <div className="border-b">
+      <div className="">
         <h2
           onClick={() => setShowMediumPriority(!showMediumPriority)}
           className="text-lg font-bold cursor-pointer p-4 bg-gray-200 flex justify-between items-center hover:bg-gray-300 transition-colors duration-200"
@@ -68,6 +74,7 @@ const AccordianTodo = ({ todos, onEdit, onDelete }) => {
             <ChevronDown size={28} />
           </div>
         </h2>
+
         <div
           className={`grid transition-all duration-300 ease-out
           ${
@@ -77,16 +84,22 @@ const AccordianTodo = ({ todos, onEdit, onDelete }) => {
           }`}
         >
           <div className="overflow-hidden">
-            <div className="flex flex-col gap-4 justify-center p-4 bg-gray-50 transform origin-top transition-transform duration-300 ease-out">
-              {mediumPriorityTodos.map((todo) => (
-                <Todo
-                  key={todo._id}
-                  todo={todo}
-                  onEdit={onEdit}
-                  onDelete={onDelete}
-                />
-              ))}
-            </div>
+            {mediumPriorityTodos.length === 0 ? (
+              <p className="text-center p-4 bg-gray-700 text-white transform origin-top transition-transform duration-300 ease-out">
+                No Tasks
+              </p>
+            ) : (
+              <div className="flex flex-col gap-4 justify-center p-4 bg-gray-50 transform origin-top transition-transform duration-300 ease-out">
+                {mediumPriorityTodos.map((todo) => (
+                  <Todo
+                    key={todo._id}
+                    todo={todo}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

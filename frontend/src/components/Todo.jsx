@@ -2,14 +2,28 @@ import { CircleCheck } from "lucide-react";
 
 function formatDate(dateString) {
   const date = new Date(dateString);
-  return new Intl.DateTimeFormat("en-IN", {
-    day: "2-digit",
-    month: "short",
-  }).format(date);
+  const today = new Date();
+  const yesterday = new Date();
+  yesterday.setDate(today.getDate() - 1);
+
+  // Remove time components for comparison
+  today.setHours(0, 0, 0, 0);
+  yesterday.setHours(0, 0, 0, 0);
+  date.setHours(0, 0, 0, 0);
+
+  if (date.getTime() === today.getTime()) {
+    return "Today";
+  } else if (date.getTime() === yesterday.getTime()) {
+    return "Yesterday";
+  } else {
+    return new Intl.DateTimeFormat("en-IN", {
+      day: "2-digit",
+      month: "short",
+    }).format(date);
+  }
 }
 
 const Todo = ({ todo, onEdit, onDelete }) => {
-  console.log(todo);
   return (
     <div className="flex gap-4 justify-between items-center p-2 border rounded-md">
       <CircleCheck
@@ -29,12 +43,12 @@ const Todo = ({ todo, onEdit, onDelete }) => {
       <div className="flex gap-2 text-white flex-shrink-0">
         <button
           onClick={() => onEdit(todo.description, todo.completed, todo._id)}
-          className="border bg-gray-400 px-6 py-1 rounded"
+          className="border bg-gray-600 hover:bg-gray-700 px-6 py-1 rounded"
         >
           Edit
         </button>
         <button
-          className="border bg-red-500 px-6 py-1 rounded"
+          className="border bg-red-500 hover:bg-red-600 px-6 py-1 rounded"
           onClick={() => onDelete(todo._id)}
         >
           Delete

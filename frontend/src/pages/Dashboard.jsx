@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import EditModal from "../components/EditModal";
 import AccordianTodo from "../components/AccordianTodo";
 import AddTodoModal from "../components/AddTodoModal";
+import { Plus } from "lucide-react";
+import UserInfo from "../components/UserInfo";
 
 const Dashboard = () => {
   const [todos, setTodos] = useState([]);
@@ -32,12 +34,6 @@ const Dashboard = () => {
     fetchTodos();
   }, []);
 
-  // !Logout
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/login";
-  };
-
   //!AddTodod
   const handleAddTodo = async (e) => {
     e.preventDefault();
@@ -55,6 +51,8 @@ const Dashboard = () => {
     } catch (error) {
       console.log(error.message);
       toast.error(error.message);
+    } finally {
+      setIsAddModalOpen(false);
     }
   };
 
@@ -88,21 +86,21 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-20 h-screen bg-gray-700">
-      {/* Logout Btn */}
-      <button
-        className="absolute right-2 top-2 border-gray-400 bg-gray-300 px-4 py-1"
-        onClick={handleLogout}
-      >
-        Logout
-      </button>
+    <div className="flex flex-col items-center gap-20 h-screen bg-gray-400">
+      {/* UserInfo */}
+      <UserInfo />
 
       {/* Add Todo Form Modal */}
       <button
         onClick={handleOpenAddModal}
-        className="px-4 py-2 bg-teal-500 text-white font-semibold rounded-lg shadow-md hover:bg-teal-600 transition-colors mt-10"
+        className="px-4 py-2 bg-gray-700 text-white font-semibold rounded-lg shadow-md hover:bg-gray-800 transition-colors mt-10"
       >
-        Open Add Todo Form
+        <p className="flex gap-2">
+          <span> Add Task</span>
+          <span>
+            <Plus />
+          </span>
+        </p>
       </button>
 
       {/* Todo List */}
